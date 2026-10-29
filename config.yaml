@@ -1,0 +1,45 @@
+# ====================================================================
+# 物体识别 Demo 配置
+# 所有数据路径以 data_root 为根，子目录用相对名。
+# 修改 data_root 即可整体迁移数据目录；代码中不硬编码任何数据路径。
+# ====================================================================
+
+# --- 数据根目录与子目录（相对 data_root）---
+data_root: D:\第四组大作业\cv_data\object_recognition_demo
+gallery_dir: gallery        # 注册图：data_root/gallery/<类别名>/*.jpg
+test_dir: test              # 测试图：data_root/test/<类别名>/*.jpg
+feature_dir: features       # 特征库目录：data_root/features/
+report_dir: reports         # 评估报告目录：data_root/reports/
+
+# --- 模型与特征 ---
+# 骨干硬编码在 core/feature_extractor.py（ResNet50 去 FC，2048 维），无配置项
+image_size: 224
+device: cpu                 # 低算力优先
+
+# --- 识别 ---
+threshold: 0.75             # 余弦相似度低于此值输出 unknown
+topk: 5                     # top-k 检索
+unknown_label: unknown      # test/unknown 下图片真值一律为此标签
+
+# --- 评估通过线 ---
+# 最终验收标准；开发期 pytest 可临时放宽到 0.85。
+eval_min_registered_acc: 0.90
+eval_min_unknown_recall: 0.90
+
+# --- 持久化文件名（位于 data_root/<feature_dir|report_dir>）---
+feature_file: gallery.npz
+labels_file: labels.json
+report_file: eval_report.json
+
+# --- 视频识别 ---
+# 视频与图片共用同一特征库（features/gallery.npz），视频只做识别，不做录入。
+video_test_dir: test/video    # 视频测试目录：data_root/test/video/<类别名>/*.mp4
+frame_interval: 1.0           # 抽帧间隔（秒），每隔 N 秒取 1 帧识别
+max_frames: 0                 # 单个视频最多抽帧数，0 表示不限制
+
+# --- 复现性 ---
+random_seed: 42
+
+# --- 语音播报（浏览器端 Web Speech API，纯离线）---
+# 类别名已为中文，直接朗读，无需英中映射；仅 unknown 播报文本可配置。
+unknown_label_zh: 未能识别出已知物体

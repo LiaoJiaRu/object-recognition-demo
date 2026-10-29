@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 测试与工具缓存
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 本地数据（数据目录与项目分离，默认在 D:/cv_data/...）
+# 若在项目内放置临时数据副本，请取消注释：
+# /data/
+
+# 备份文件
+*.bak
+
+# 环境变量与密钥
+.env
+.env.*
+*.key
+*.pem
+
+# 模型权重（物体识别项目可能产生）
+*.pt
+*.pth
+*.onnx
+*.h5
+*.pkl
+*.weights
+
+# 截图目录（空文件夹 Git 不追踪，规则仅作明确）
+.screenshots/
